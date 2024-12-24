@@ -8,8 +8,8 @@ Hướng dẫn dưới đây sẽ giúp bạn sao chép dự án và chạy nó 
 
 ### Yêu Cầu
 
-- Node.js (phiên bản >= 14.0)
-- npm (phiên bản >= 6.0) hoặc yarn (phiên bản >= 1.22)
+- Node.js (phiên bản 18.20.5)
+- npm (phiên bản >= 6.0)
 
 ### Cài Đặt
 
