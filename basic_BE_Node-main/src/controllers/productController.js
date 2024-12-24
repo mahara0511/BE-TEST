@@ -41,6 +41,31 @@ class ProductController {
             });
         }
     }
+    // CREATE EXTENSION IF NOT EXISTS pg_trgm;
+    // CREATE EXTENSION IF NOT EXISTS unaccent;
+    // [GET] api/v1/product/fullTextSearch?name=:name&description=:description&category=:category&brand=:brand
+    static async fullTextSearchProduct(req, res) {
+        try {
+            const { name, description, brand, category } = req.query;
+            const products = await productModel.fullTestSearchProduct(
+                name,
+                description,
+                brand,
+                category
+            );
+
+            return res.status(200).json({
+                message: 'Products fetched successfully',
+                data: products,
+            });
+        } catch (error) {
+            console.error('Controller Error:', error.message);
+            return res.status(500).json({
+                message: 'Unable to fetch products',
+                error: error.message,
+            });
+        }
+    }
 }
 
 module.exports = ProductController;
