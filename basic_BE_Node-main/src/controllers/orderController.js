@@ -59,7 +59,12 @@ class OrderController {
             }
 
             // Gửi email xác nhận đơn hàng
-            await sendOrderConfirmationEmail(guest.email, orderId, guest.name);
+            emailQueue.addToQueue({
+                to: customerEmail,
+                subject: `Order Confirmation - ${orderId}`,
+                text: `Thank you for your order! Your order ID is ${orderId} and the total amount is ${totalAmount}.`,
+                html: `<strong>Thank you for your order!</strong><br>Your order ID is ${orderId} and the total amount is ${totalAmount}.`,
+            });
 
             res.status(201).json({
                 message: 'Order created successfully',
