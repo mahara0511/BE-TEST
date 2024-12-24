@@ -1,6 +1,3 @@
-const { Request, Response } = require('express');
-const { OK, Created } = require('../helpers/successResponse');
-const productService = require('../services/productServices');
 const productModel = require('../model/productModel');
 class ProductController {
     // [GET] api/v1/product/getAllProducts
@@ -43,16 +40,11 @@ class ProductController {
     }
     // CREATE EXTENSION IF NOT EXISTS pg_trgm;
     // CREATE EXTENSION IF NOT EXISTS unaccent;
-    // [GET] api/v1/product/fullTextSearch?name=:name&description=:description&category=:category&brand=:brand
+    // [GET] api/v1/product/fullTextSearch?text=:text
     static async fullTextSearchProduct(req, res) {
         try {
-            const { name, description, brand, category } = req.query;
-            const products = await productModel.fullTestSearchProduct(
-                name,
-                description,
-                brand,
-                category
-            );
+            const { text } = req.query;
+            const products = await productModel.fullTestSearchProduct(text);
 
             return res.status(200).json({
                 message: 'Products fetched successfully',
