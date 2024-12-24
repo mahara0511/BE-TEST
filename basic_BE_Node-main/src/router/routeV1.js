@@ -3,12 +3,13 @@ dotenv.config();
 const express = require('express');
 const AccessRoute = require('./access/index.js');
 const ProductRoute = require('./product/index.js');
+const OrderRoute = require('./order/index.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
     res.send('Hello World!');
 });
-
+router.use('/order', OrderRoute);
 router.use('/product', ProductRoute);
 router.use('/auth', AccessRoute);
 

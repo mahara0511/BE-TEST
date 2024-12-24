@@ -4,41 +4,71 @@ class productModel {
     static async getAllProducts() {
         try {
             const result = await db.query('SELECT * FROM product');
-            return result.rows;
+            return {
+                success: true,
+                data: result.rows,
+            };
         } catch (error) {
             console.error('Error fetching products:', error.message);
-            throw new Error('Unable to fetch products');
+
+            // Trả về lỗi dưới dạng đối tượng
+            return {
+                success: false,
+                message: 'Unable to fetch products',
+                error: error.message,
+            };
         }
     }
 
     static async getProducts(category) {
         try {
-            let query = 'SELECT * FROM product WHERE category = $1';
-            const param = [category];
-            const result = await db.query(query, param);
-            console.log(result.rows);
-            return result.rows;
+            const query = 'SELECT * FROM product WHERE category = $1';
+            const params = [category];
+            const result = await db.query(query, params);
+
+            return {
+                success: true,
+                data: result.rows,
+            };
         } catch (error) {
-            console.error('Error fetching products:', error.message);
-            throw new Error('Unable to fetch products');
+            console.error(
+                'Error fetching products by category:',
+                error.message
+            );
+            return {
+                success: false,
+                message: 'Unable to fetch products by category',
+                error: error.message,
+            };
         }
     }
 
-    static async fullTestSearchProduct(text) {
+    static async fullTextSearchProduct(text) {
         try {
-            let query =
-                'SELECT * FROM product WHERE unaccent(name) % unaccent($1) OR unaccent(description) % unaccent($1) OR unaccent(brand_name) % unaccent($1) OR unaccent(category) % unaccent($1)';
-            let queryParams = [];
-
-            if (text) {
-                queryParams.push(text);
-                const result = await db.query(query, queryParams);
-                return result.rows;
-            } else {
-                throw new Error('No search parameter provide');
+            if (!text) {
+                return {
+                    success: false,
+                    message: 'No search parameter provided',
+                    error: null,
+                };
             }
+
+            const query =
+                'SELECT * FROM product WHERE unaccent(name) % unaccent($1) OR unaccent(description) % unaccent($1) OR unaccent(brand_name) % unaccent($1) OR unaccent(category) % unaccent($1)';
+            const queryParams = [text];
+            const result = await db.query(query, queryParams);
+
+            return {
+                success: true,
+                data: result.rows,
+            };
         } catch (error) {
-            throw new Error('Error fetching products: ' + error.message);
+            console.error('Error performing full-text search:', error.message);
+            return {
+                success: false,
+                message: 'Error performing full-text search',
+                error: error.message,
+            };
         }
     }
 }

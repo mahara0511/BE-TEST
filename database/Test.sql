@@ -18,9 +18,9 @@ VALUES
 ('Furniture', 'furniture.png'),
 ('Sneakers', 'dichoikhong.png');
 
-INSERT INTO product (name, discount, price, description, brand_id, category)
+INSERT INTO product (name, discount, price, description, brand_name, category)
 VALUES
-('KAPPA Women ''s Sneakers', 10.00, 980000, 'Latest model with great features', 1, 'Sneakers');
+('KAPPA Women ''s Sneakers', 10.00, 980000, 'Latest model with great features', 'Brand A', 'Sneakers');
 
 INSERT INTO detail (image, color, size, product_id)
 VALUES 
