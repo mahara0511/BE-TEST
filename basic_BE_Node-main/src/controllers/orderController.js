@@ -60,7 +60,7 @@ class OrderController {
 
             // Gửi email xác nhận đơn hàng
             emailQueue.addToQueue({
-                to: customerEmail,
+                to: guest.email,
                 subject: `Order Confirmation - ${orderId}`,
                 text: `Thank you for your order! Your order ID is ${orderId} and the total amount is ${totalAmount}.`,
                 html: `<strong>Thank you for your order!</strong><br>Your order ID is ${orderId} and the total amount is ${totalAmount}.`,
