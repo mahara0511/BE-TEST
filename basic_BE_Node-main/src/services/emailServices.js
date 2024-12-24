@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'khanhzip14@gmail.com',
-        pass: '0946635515',
+        user: 'khanhokozzz@gmail.com',
+        pass: '0946635515a',
     },
 });
 
@@ -14,7 +14,7 @@ const sendOrderConfirmationEmail = async (
     guestName
 ) => {
     const mailOptions = {
-        from: 'khanhzip14@gmail.com',
+        from: 'khanhokozzz@gmail.com',
         to: recipientEmail,
         subject: 'Order Confirmation',
         text: `Dear ${guestName},\n\nThank you for your order. Your order ID is ${orderId}. We will process it shortly.\n\nBest regards,\nGENZ company`,

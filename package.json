@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "nodemailer": "^6.9.16"
+    "bull": "^4.16.5",
+    "nodemailer": "^6.9.16",
+    "redis": "^4.7.0"
   }
 }

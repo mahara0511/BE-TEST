@@ -1,4 +1,4 @@
-const { sendOrderConfirmationEmail } = require('../services/emailService'); // Import the email service
+const { sendOrderConfirmationEmail } = require('../services/emailServices'); // Import the email service
 const BuyerModel = require('../model/buyerModel');
 const OrderModel = require('../model/orderModel');
 
