@@ -85,7 +85,6 @@ CREATE TABLE "order" (
     total_price DECIMAL(10, 2) NOT NULL,
     buyer_id INT,
     status VARCHAR(50),
-    detail_id INT,
     CONSTRAINT fk_order_buyer FOREIGN KEY (buyer_id) REFERENCES buyer(id),
     CONSTRAINT fk_order_detail FOREIGN KEY (detail_id) REFERENCES detail(id)
 );
@@ -115,7 +114,7 @@ CREATE TABLE cart_item (
     cart_id INT,
     detail_id INT,
     CONSTRAINT fk_cart_item_product FOREIGN KEY (product_id) REFERENCES product(id),
-    CONSTRAINT fk_cart_item_cart FOREIGN KEY (cart_id) REFERENCES cart(id)
+    CONSTRAINT fk_cart_item_cart FOREIGN KEY (cart_id) REFERENCES cart(id),
     CONSTRAINT fk_cart_item_detail FOREIGN KEY (detail_id) REFERENCES detail(id)
 );
 

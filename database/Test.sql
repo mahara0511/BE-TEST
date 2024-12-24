@@ -24,7 +24,7 @@ VALUES
 
 INSERT INTO detail (image, color, size, product_id)
 VALUES 
-()
+('sneakers.png', 'yellow', '36', 1);
 
 INSERT INTO "order" (order_date, total_price, buyer_id, status)
 VALUES
@@ -33,6 +33,7 @@ VALUES
 INSERT INTO order_item (number, product_id, order_id, detail_id)
 VALUES
 (5, 1, 1, 1);
+
 
 -- c
 
