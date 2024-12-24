@@ -20,3 +20,5 @@ Hướng dẫn dưới đây sẽ giúp bạn sao chép dự án và chạy nó 
    cd your-project
 3. Cài đặt các gói phụ thuộc:
    npm install
+4. Chạy ứng dụng Node.js:
+   npm start
