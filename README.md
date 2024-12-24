@@ -4,7 +4,7 @@
 
 ## Bắt Đầu
 
-Hướng dẫn dưới đây sẽ giúp bạn sao chép dự án và chạy nó trên máy tính của bạn để phát triển và kiểm thử.
+Hướng dẫn dưới đây sẽ giúp anh/chị sao chép dự án và chạy nó trên máy tính để kiểm tra ạ.
 
 ### Yêu Cầu
 
@@ -22,7 +22,11 @@ Hướng dẫn dưới đây sẽ giúp bạn sao chép dự án và chạy nó 
 4. Cài đặt các gói phụ thuộc:
    ```sh
    npm install
-5. Chạy ứng dụng Node.js:
+5. Tạo file .env và copy nội dụng từ file .env.sample sang   
+6. Chạy ứng dụng Node.js:
    ```sh
    npm start
-### 
+## Một số giải thích thêm
+- File Bài làm.pdf chứa nội dung của câu hỏi 1 và 2
+- Thư mục database chứa code tạo lên database và code của phần 2.1 đến 2.4 cũng như hình ảnh của hai lược đồ thiết kế lên database. Ngoài ra, do em dùng neon nên khi chạy ứng dụng không cần khởi tạo database để sử dụng
+- Thư mục image chứa một số hình ảnh chạy kết quả của testcase để anh/chị xem rõ hơn phòng trường hợp hình ảnh trong pdf bị mờ.  
