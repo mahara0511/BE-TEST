@@ -35,8 +35,7 @@ CREATE TABLE "user" (
 );
 
 CREATE TABLE brand (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL PRIMARY KEY,
     description TEXT NOT NULL,
     country VARCHAR(50) NOT NULL,
     image VARCHAR(255)
@@ -53,9 +52,9 @@ CREATE TABLE product (
     discount DECIMAL(3, 0),
     price DECIMAL(12, 0) NOT NULL,
     description TEXT,
-    brand_id INT NOT NULL,
+    brand_name VARCHAR(255) NOT NULL,
     category VARCHAR(255),
-    CONSTRAINT fk_product_brand FOREIGN KEY (brand_id) REFERENCES brand(id),
+    CONSTRAINT fk_product_brand FOREIGN KEY (brand_name) REFERENCES brand(name),
     CONSTRAINT fk_product_category FOREIGN KEY (category) REFERENCES category(name)
 );
 
@@ -85,8 +84,7 @@ CREATE TABLE "order" (
     total_price DECIMAL(10, 2) NOT NULL,
     buyer_id INT,
     status VARCHAR(50),
-    CONSTRAINT fk_order_buyer FOREIGN KEY (buyer_id) REFERENCES buyer(id),
-    CONSTRAINT fk_order_detail FOREIGN KEY (detail_id) REFERENCES detail(id)
+    CONSTRAINT fk_order_buyer FOREIGN KEY (buyer_id) REFERENCES buyer(id)
 );
 
 CREATE TABLE order_item (

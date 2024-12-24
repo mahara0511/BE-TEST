@@ -46,18 +46,18 @@ VALUES
 ('Beauty', 'beauty.png'),
 ('Gadgets', 'gadgets.png');
 
-INSERT INTO product (name, discount, price, description, brand_id, category)
+INSERT INTO product (name, discount, price, description, brand_name, category)
 VALUES
-('Stylish Shirt', 15.00, 300000, 'Comfortable and trendy', 2, 'Clothing'),
-('Smartphone X', 20.00, 12000000, 'Latest technology', 3, 'Electronics'),
-('Running Shoes', 10.00, 1500000, 'Lightweight and durable', 1, 'Sneakers'),
-('Cookware Set', 25.00, 500000, 'Non-stick surface', 4, 'Kitchen'),
-('Yoga Mat', 5.00, 200000, 'Eco-friendly material', 5, 'Health'),
-('Action Figure', 30.00, 350000, 'Collector’s edition', 6, 'Toys'),
-('Lipstick', 18.00, 150000, 'Long-lasting and vibrant', 7, 'Beauty'),
-('Smartwatch', 10.00, 2500000, 'Track your fitness', 8, 'Gadgets'),
-('Novel Book', 0.00, 200000, 'Best-selling fiction', 9, 'Books'),
-('Mountain Bike', 12.00, 8000000, 'For adventure seekers', 10, 'Sports');
+('Stylish Shirt', 15.00, 300000, 'Comfortable and trendy', 'Brand C', 'Clothing'),
+('Smartphone X', 20.00, 12000000, 'Latest technology', 'Brand B', 'Electronics'),
+('Running Shoes', 10.00, 1500000, 'Lightweight and durable', 'Brand A', 'Sneakers'),
+('Cookware Set', 25.00, 500000, 'Non-stick surface', 'Brand J', 'Kitchen'),
+('Yoga Mat', 5.00, 200000, 'Eco-friendly material', 'Brand G', 'Health'),
+('Action Figure', 30.00, 350000, 'Collector’s edition', 'Brand H', 'Toys'),
+('Lipstick', 18.00, 150000, 'Long-lasting and vibrant', 'Brand I', 'Beauty'),
+('Smartwatch', 10.00, 2500000, 'Track your fitness', 'Brand A', 'Gadgets'),
+('Novel Book', 0.00, 200000, 'Best-selling fiction', 'Brand F', 'Books'),
+('Mountain Bike', 12.00, 8000000, 'For adventure seekers', 'Brand C', 'Sports');
 
 INSERT INTO detail (product_id, image, color, size)
 VALUES

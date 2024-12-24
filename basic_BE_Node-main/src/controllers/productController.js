@@ -25,7 +25,7 @@ class ProductController {
             const { category } = req.query;
             if (!category) {
                 return res.status(404).json({
-                    message: 'Not Found',
+                    message: 'Invalid input',
                 });
             }
             const products = await productModel.getProducts(category);
