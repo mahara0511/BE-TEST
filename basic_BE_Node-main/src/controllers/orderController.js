@@ -1,37 +1,65 @@
+const { sendOrderConfirmationEmail } = require('../services/emailService'); // Import the email service
 const BuyerModel = require('../model/buyerModel');
 const OrderModel = require('../model/orderModel');
+
 class OrderController {
+    // [Post] api/v1/order/create
     static async createOrder(req, res) {
         try {
             const { guest, order, orderItems } = req.body;
 
             // Thêm thông tin buyer
-            buyerResult = BuyerModel.add({ guest });
+            let buyer = await BuyerModel.addBuyer(
+                guest.name,
+                guest.phone,
+                guest.gender,
+                guest.house_number,
+                guest.district,
+                guest.commune,
+                guest.province,
+                guest.housing_type
+            );
+            if (!buyer.success) {
+                return res.status(500).json({
+                    message: 'Failed to create buyer',
+                    error: buyer.error,
+                });
+            }
 
-            const buyerId = buyerResult.rows[0].id;
+            const buyerId = buyer.buyerId;
 
             // Thêm thông tin guest
-            await db.query(`INSERT INTO guest (id, email) VALUES ($1, $2)`, [
-                buyerId,
-                guest.id,
-            ]);
+            let guestResult = await BuyerModel.addGuest(buyerId, guest.email);
+            if (!guestResult.success) {
+                return res.status(500).json({
+                    message: 'Failed to create guest',
+                });
+            }
 
             // Thêm thông tin order
-            const orderResult = await db.query(
-                `INSERT INTO "order" (order_date, total_price, buyer_id, status) 
-                 VALUES (current_timestamp, $1, $2, $3) RETURNING id`,
-                [order.totalPrice, buyerId, 'Pending']
+            const orderResult = await OrderModel.createOrder(
+                order.totalPrice,
+                buyerId
             );
-            const orderId = orderResult.rows[0].id;
+            if (!orderResult.success) {
+                return res.status(500).json({
+                    message: 'Failed to create order',
+                });
+            }
+            const orderId = orderResult.orderId;
 
             // Xử lý từng sản phẩm trong danh sách orderItems
             for (const item of orderItems) {
-                await db.query(
-                    `INSERT INTO order_item (number, product_id, order_id, detail_id) 
-                     VALUES ($1, $2, $3, $4)`,
-                    [item.number, item.productId, orderId, item.detailId]
-                );
+                let ok = await OrderModel.createOrderItem(item, orderId);
+                if (!ok.success) {
+                    return res.status(500).json({
+                        message: ok.error,
+                    });
+                }
             }
+
+            // Gửi email xác nhận đơn hàng
+            await sendOrderConfirmationEmail(guest.email, orderId, guest.name);
 
             res.status(201).json({
                 message: 'Order created successfully',
@@ -39,7 +67,6 @@ class OrderController {
             });
         } catch (error) {
             console.error('Error creating order:', error.message);
-
             res.status(500).json({
                 message: 'Failed to create order',
                 error: error.message,
@@ -47,7 +74,35 @@ class OrderController {
         }
     }
 
-    static async confirm(req, res) {}
+    // [PUT] api/v1/order/editStatus
+    static async editStatus(req, res) {
+        try {
+            const { id, success } = req.body;
+
+            // Gọi phương thức editOrderStatus để cập nhật trạng thái
+            const result = await OrderModel.editOrderStatus(id, success);
+
+            if (result.success) {
+                // Trả về phản hồi nếu trạng thái cập nhật thành công
+                res.status(200).json({
+                    message: 'Order edited successfully',
+                    orderId: id, // Trả về id của đơn hàng đã được sửa
+                });
+            } else {
+                // Trường hợp không tìm thấy đơn hàng hoặc có lỗi
+                res.status(400).json({
+                    message: result.message || 'Failed to edit order',
+                });
+            }
+        } catch (error) {
+            console.error('Error edit order:', error.message);
+
+            res.status(500).json({
+                message: 'Failed to edit order',
+                error: error.message,
+            });
+        }
+    }
 }
 
 module.exports = OrderController;
