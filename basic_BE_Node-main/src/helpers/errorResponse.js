@@ -42,4 +42,12 @@ class InternalServerError extends ErrorResponse {
     }
 }
 
-module.exports = { ErrorResponse, BadRequestError, UnauthorizedError, NotFoundError, ForbiddenError, InternalServerError, PaymentRequired };
+module.exports = {
+    ErrorResponse,
+    BadRequestError,
+    UnauthorizedError,
+    NotFoundError,
+    ForbiddenError,
+    InternalServerError,
+    PaymentRequired,
+};

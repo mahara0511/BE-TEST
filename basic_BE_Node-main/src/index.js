@@ -1,11 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const router = require('./router/routeV1.js');
-const configEnv = require('./configs/configEnv.js');
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3900;
-
 
 app.use(
     cors({
@@ -18,7 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use('/api/v1', router);
-
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
