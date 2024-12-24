@@ -17,8 +17,11 @@ Hướng dẫn dưới đây sẽ giúp bạn sao chép dự án và chạy nó 
    ```sh
    git clone https://github.com/your-username/your-project.git
 2. Di chuyển vào thư mục của dự án:
+   ```sh
    cd your-project
-3. Cài đặt các gói phụ thuộc:
+4. Cài đặt các gói phụ thuộc:
+   ```sh
    npm install
-4. Chạy ứng dụng Node.js:
+5. Chạy ứng dụng Node.js:
+   ```sh
    npm start
